@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 @available(iOS 13, *)
 public struct PageControl: UIViewRepresentable {
     var numberOfPages: Int
