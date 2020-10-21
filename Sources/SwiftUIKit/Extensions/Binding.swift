@@ -37,3 +37,29 @@ public extension Binding where Value == Bool {
         }
     }
 }
+@available(iOS 13, *)
+public extension Binding where Value == PresentationMode {
+    func dismissAction() -> () -> Void {
+        return {
+            self.wrappedValue.dismiss()
+        }
+    }
+}
+@available(iOS 13, *)
+public extension Binding {
+    init(value: Value, action: @escaping () -> Void) {
+        self.init(get: { value }, set: { _ in action()} )
+    }
+    
+    init(get: @escaping () -> Value, action: @escaping () -> Void) {
+        self.init(get: get, set: { _ in action() })
+    }
+    
+    init(get: @escaping () -> Value) {
+        self.init(get: get, set: { _ in })
+    }
+    
+    init(value: Value) {
+        self.init(get: { value }, set: { _ in })
+    }
+}
