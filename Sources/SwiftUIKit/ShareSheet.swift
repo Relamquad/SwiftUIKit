@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-public typealias Callback = (_ activityType: UIActivity.ActivityType?, _ completed: Bool, _ returnedItems: [Any]?, _ error: Error?) -> Void
 
 public struct ShareSheet: UIViewControllerRepresentable {
-      
-    private let activityItems: [Any]
+    public typealias Callback = (_ activityType: UIActivity.ActivityType?, _ completed: Bool, _ returnedItems: [Any]?, _ error: Error?) -> Void
+    
+    private var activityItems: [Any]?
     private var applicationActivities: [UIActivity]?
     private var excludedActivityTypes: [UIActivity.ActivityType]?
     private var callback: Callback?
@@ -24,7 +24,7 @@ public struct ShareSheet: UIViewControllerRepresentable {
     
     public func makeUIViewController(context: Context) -> UIActivityViewController {
         let controller = UIActivityViewController(
-            activityItems: activityItems,
+            activityItems: activityItems!,
             applicationActivities: applicationActivities)
         controller.excludedActivityTypes = excludedActivityTypes
         controller.completionWithItemsHandler = callback
